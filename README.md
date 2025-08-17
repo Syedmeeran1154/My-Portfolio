@@ -38,7 +38,7 @@ You only need a web browser to run this project. A code editor like VS Code is r
 Installation
 Clone the repository:
 
-git clone https:[//github.com/your-username/your-repo.git](https://github.com/Syedmeeran1154/My-Portfolio.git)
+git clone https:[My Portfolio](https://github.com/Syedmeeran1154/My-Portfolio.git)
 
 Navigate to the project directory:
 
