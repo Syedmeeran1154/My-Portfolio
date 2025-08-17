@@ -2,7 +2,8 @@
 
 This is a clean, modern, and responsive portfolio website built to showcase my skills and projects. The design is minimal and focuses on a dark theme with vibrant accents to create a visually appealing and professional user experience.
 
-Features
+# Features
+
 Responsive Design: The layout adapts seamlessly to different screen sizes, from mobile phones to large desktop monitors.
 
 Smooth Scrolling: Navigating between sections is fluid and intuitive with smooth scroll animations.
@@ -15,7 +16,8 @@ Contact Form: A functional contact form powered by Formspree allows visitors to 
 
 Social Links: Links to social media and professional profiles are integrated into the footer.
 
-Technologies Used
+# Technologies Used
+
 HTML5: For the core structure of the website.
 
 CSS3: For custom styling and animations.
@@ -26,7 +28,8 @@ JavaScript: For interactivity, including the smooth scroll, mobile menu, modals,
 
 Formspree: A backend-as-a-service to handle contact form submissions without needing to write server-side code.
 
-Getting Started
+# Getting Started
+
 Follow these steps to get a copy of the project up and running on your local machine.
 
 Prerequisites
@@ -44,7 +47,8 @@ cd your-repo
 Open the file:
 Open the index.html file in your preferred web browser to view the website locally.
 
-Deployment
+# Deployment
+
 This website is a static site and can be easily deployed to a service like Netlify, Vercel, or GitHub Pages.
 
 Deploying with Netlify
@@ -60,5 +64,6 @@ Publish directory: Leave this blank.
 
 Deploy: Click "Deploy site" and Netlify will build and host your website automatically.
 
-License
+# License
+
 This project is open source and available under the MIT License.
