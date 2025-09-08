@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="icon" type="image/png" size="42x42" href="images\ChatGPT Image Sep 1, 2025, 10_01_01 PM.png" />
+    <title>Syed Meeran S - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0a; /* A very dark background for contrast */
+            color: #d1d5db; /* Light gray text for readability */
+            overflow-x: hidden; /* Prevent horizontal scroll from bouncing balls */
+        }
+        /* Custom scrollbar for a sleek look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1f2937;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #4b5563;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6b7280;
+        }
+
+        /* Hero section title animation */
+        #hero-title {
+            animation: slideInDown 1s ease-out;
+        }
+        @keyframes slideInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Section heading and separator animation */
+        .section-header-animation {
+            animation: fadeIn 1s ease-in-out;
+        }
+        .section-header-animation h2 {
+            text-shadow: 0 0 10px #14b8a6, 0 0 20px #14b8a6;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Card and button hover effects with glow */
+        .card-effect:hover {
+            transform: scale(1.02);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            box-shadow: 0 0 15px rgba(20, 184, 166, 0.6), 0 0 30px rgba(20, 184, 166, 0.3); /* Teal glow */
+        }
+        .btn-effect {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .btn-effect:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(20, 184, 166, 0.4), 0 0 20px rgba(20, 184, 166, 0.2); /* Teal glow */
+        }
+        .divider-glow {
+            box-shadow: 0 0 10px rgba(20, 184, 166, 0.6);
+            transition: box-shadow 0.3s ease;
+        }
+
+        /* Modal animation with glow */
+        .modal-animation {
+            animation: modalPopIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 0 25px rgba(20, 184, 166, 0.8), 0 0 50px rgba(20, 184, 166, 0.4);
+        }
+        @keyframes modalPopIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        /* Footer icon hover effect */
+        .footer-icon:hover {
+            transform: translateY(-4px) scale(1.1);
+            color: #14b8a6;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+        .footer-icon i {
+            font-size: 2rem; /* 32px */
+        }
+
+        /* Canvas background styling */
+        #background-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            width: 100%;
+            height: 100%;
+            background: #0a0a0a;
+        }
+
+        /* New styles for the "Try Now" button */
+        .btn-try-now {
+            background-image: linear-gradient(45deg, #14b8a6, #38bdf8);
+            color: black;
+            font-weight: 600;
+            text-align: center;
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+            border-radius: 9999px;
+            box-shadow: 0 10px 15px rgba(20, 184, 166, 0.3), 0 4px 6px rgba(20, 184, 166, 0.2);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .btn-try-now:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 20px rgba(20, 184, 166, 0.5), 0 6px 8px rgba(20, 184, 166, 0.3);
+            background-image: linear-gradient(45deg, #38bdf8, #14b8a6); /* Reverse gradient on hover */
+        }
+    </style>
+</head>
+<body class="text-gray-200 min-h-screen">
+    <canvas id="background-canvas"></canvas>
+
+    <header class="fixed top-0 left-0 right-0 z-50 bg-[#0a0a0a] bg-opacity-80 backdrop-blur-sm p-4 shadow-xl">
+        <nav class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="#hero-section" class="text-3xl font-bold text-[#38bdf8] hover:text-white transition-colors">SM</a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#about-me-section" class="nav-link text-gray-400 hover:text-white transition-colors">About</a>
+                <a href="#resume-section" class="nav-link text-gray-400 hover:text-white transition-colors">Resume</a>
+                <a href="#portfolio-section" class="nav-link text-gray-400 hover:text-white transition-colors">Portfolio</a>
+                <a href="#contact-section" class="nav-link text-gray-400 hover:text-white transition-colors">Contact</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden text-gray-400 hover:text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>
+            </button>
+        </nav>
+    </header>
+
+    <div id="mobile-menu" class="fixed inset-0 z-40 bg-black hidden flex flex-col items-center justify-center space-y-8">
+        <button id="close-menu-button" class="absolute top-6 right-6 text-gray-400 hover:text-white">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+        <a href="#about-me-section" class="nav-link text-2xl text-gray-400 hover:text-white transition-colors">About</a>
+        <a href="#resume-section" class="nav-link text-2xl text-gray-400 hover:text-white transition-colors">Resume</a>
+        <a href="#portfolio-section" class="nav-link text-2xl text-gray-400 hover:text-white transition-colors">Portfolio</a>
+        <a href="#contact-section" class="nav-link text-2xl text-gray-400 hover:text-white transition-colors">Contact</a>
+    </div>
+
+    <main class="max-w-7xl mx-auto p-6 pt-24">
+
+        <section id="hero-section" class="min-h-[calc(100vh-6rem)] flex flex-col md:flex-row items-center justify-center text-center md:text-left py-20 md:py-0">
+            <div class="md:w-1/3 flex justify-center md:justify-end mb-8 md:mb-0 md:pr-10">
+                <img
+                    src="./images/SyedMeeran_IMG (3).png"
+                    alt="Syed Meeran S"
+                    class="rounded-full w-48 h-48 sm:w-64 sm:h-64 object-cover border-4 border-[#14b8a6]"
+                    onerror="this.onerror=null;this.src='https://placehold.co/150x150/111827/d1d5db?text=SS';"
+                />
+            </div>
+            <div class="md:w-2/3 md:pl-10">
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-2" id="hero-title">
+                    Syed Meeran S
+                </h1>
+                <p class="text-xl sm:text-2xl text-gray-400 font-medium mb-4">Software Developer</p>
+                <p class="mt-4 max-w-xl text-lg sm:text-xl text-gray-400 leading-relaxed">
+                    Turning ideas into impact, I’m Syed Meeran — a developer who blends logic with creativity.
+From crafting scalable apps to designing intuitive user experiences, I love building solutions that matter.
+                </p>
+                <a href="#contact-section" class="mt-8 md:mt-10 inline-block px-8 py-4 bg-[#14b8a6] text-black font-semibold rounded-full shadow-lg transition-all btn-effect">
+                    Get In Touch
+                </a>
+            </div>
+        </section>
+
+        <section id="about-me-section" class="py-16">
+            <h2 class="text-4xl font-bold text-white mb-2 section-header-animation">About Me</h2>
+            <div class="w-20 h-1 bg-[#14b8a6] rounded-full mb-10 section-header-animation divider-glow"></div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <p class="text-lg text-gray-400 leading-relaxed">
+                       I am a passionate Full Stack Developer with strong expertise in Java, Web Development, and Cloud Technologies. My journey began with curiosity for how software works, which grew into a drive to create scalable, user-friendly, and efficient solutions.
+                    </p>
+                    <p class="text-lg text-gray-400 leading-relaxed">
+                     I enjoy solving complex problems and transforming ideas into seamless digital experiences. With hands-on experience in frontend (React, UI/UX principles), backend (Node.js, Python, Java), and databases (MySQL, MongoDB, Firebase), I bring both creativity and logic to every project.
+
+I believe in writing clean code, collaborating effectively with teams, and continuously learning new technologies to stay ahead in the ever-evolving tech landscape.
+                    </p>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div data-modal-target="web-dev-modal" class="modal-trigger p-6 bg-[#111111] rounded-2xl flex flex-col items-center text-center card-effect cursor-pointer">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-code w-10 h-10 text-[#38bdf8] mb-2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                        <h3 class="text-lg font-semibold text-white">Web Development</h3>
+                        <p class="text-sm text-gray-400 mt-1">Building modern, scalable web apps.</p>
+                    </div>
+                    <div data-modal-target="mobile-apps-modal" class="modal-trigger p-6 bg-[#111111] rounded-2xl flex flex-col items-center text-center card-effect cursor-pointer">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-smartphone w-10 h-10 text-[#f97316] mb-2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" x2="12" y1="18" y2="18"></line></svg>
+                        <h3 class="text-lg font-semibold text-white">Mobile Apps</h3>
+                        <p class="text-sm text-gray-400 mt-1">Creating high-performance mobile experiences.</p>
+                    </div>
+                    <div data-modal-target="ui-ux-modal" class="modal-trigger p-6 bg-[#111111] rounded-2xl flex flex-col items-center text-center card-effect cursor-pointer">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pen-tool w-10 h-10 text-[#14b8a6] mb-2"><path d="m12.1 12.1 6.5 6.5a1 1 0 0 0 0-1.7l-4.8-4.8"></path><path d="m17 7 5 5-5 5-5-5Z"></path><path d="M22 12L17 7h-5l-5 5v5l5 5h5l5-5Z"></path><path d="M12 2v5l-5 5H2"></path></svg>
+                        <h3 class="text-lg font-semibold text-white">UI/UX Design</h3>
+                        <p class="text-sm text-gray-400 mt-1">Designing intuitive and beautiful interfaces.</p>
+                    </div>
+                    <div data-modal-target="dsa-modal" class="modal-trigger p-6 bg-[#111111] rounded-2xl flex flex-col items-center text-center card-effect cursor-pointer">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-puzzle w-10 h-10 text-[#06b6d4] mb-2"><path d="M19 15.5V11a2 2 0 0 0-2-2h-2V7a2 2 0 0 0-2-2h-3v2H7a2 2 0 0 0-2-2H3a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h2v3a2 2 0 0 0 2 2h3v2a2 2 0 0 0 2 2h3a2 2 0 0 0 2-2v-3h2a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2h-3V7a2 2 0 0 0-2-2h-3v2H7a2 2 0 0 0-2-2H3a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h2v3a2 2 0 0 0 2 2h3v2a2 2 0 0 0 2 2h3a2 2 0 0 0 2-2v-3h2a2 2 0 0 0 2-2v-3Z"/></svg>
+                        <h3 class="text-lg font-semibold text-white">Problem Solving & DSA</h3>
+                        <p class="text-sm text-gray-400 mt-1">Crafting efficient solutions with data structures.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="resume-section" class="py-16">
+            <h2 class="text-4xl font-bold text-white mb-2 section-header-animation">Resume</h2>
+            <div class="w-20 h-1 bg-[#14b8a6] rounded-full mb-10 section-header-animation divider-glow"></div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div class="bg-[#111111] p-8 rounded-2xl card-effect">
+                    <h3 class="text-2xl font-semibold text-white mb-4">Education</h3>
+                    <div class="space-y-6">
+                        <div>
+                            <p class="text-lg font-medium text-white">Dhanalakshmi College of Engineering</p>
+                            <p class="text-gray-400 text-sm">BE.CSE | 2022 - 2026</p>
+                        </div>
+                        <div>
+                            <p class="text-lg font-medium text-white">Sri Ramakrishna Matric Hr Sec School</p>
+                            <p class="text-gray-400 text-sm">HSC | 2020 - 2022</p>
+                        </div>
+                        <div>
+                            <p class="text-lg font-medium text-white">Seventh-Day Adventist Matric Hr Sec School</p>
+                            <p class="text-gray-400 text-sm">SSLC | 2015 - 2020</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-[#111111] p-8 rounded-2xl card-effect">
+                    <h3 class="text-2xl font-semibold text-white mb-4">Experience</h3>
+                    <div class="space-y-6">
+                        <div>
+                            <p class="text-lg font-medium text-white">Full-Stack Development Intern</p>
+                            <p class="text-gray-400 text-sm">Vulture Lines Tech Management Pvt Ltd | Feb 10,2025 - Mar 10,2025</p>
+                            <ul class="list-disc list-inside text-gray-300 mt-2 space-y-1">
+                                <li>Built a Library Management System , improving task automation.</li>
+                                <li>Optimized backend & UI, achieving 20% faster load time.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <p class="text-lg font-medium text-white">UI/UX Development Intern</p>
+                            <p class="text-gray-400 text-sm">Oneyes Infotech Solutions Pvt Ltd | Apr 10,2025 - Apr 30,2025</p>
+                            <ul class="list-disc list-inside text-gray-300 mt-2 space-y-1">
+                                <li>Designed a Music Application , improving playlist management and user engagement by 20%</li>
+                                <li>Created an intuitive UI/UX, enhancing accessibility and boosting usability by 15%.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="portfolio-section" class="py-16">
+            <h2 class="text-4xl font-bold text-white mb-2 section-header-animation">Portfolio</h2>
+            <div class="w-20 h-1 bg-[#14b8a6] rounded-full mb-10 section-header-animation divider-glow"></div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-[#111111] p-6 rounded-2xl card-effect">
+                     <img src="./images/Gemini_Generated_Image_p2w88dp2w88dp2w8.png" alt="Career Nest" class="w-full h-48 object-cover rounded-xl mb-4">
+                    <h3 class="text-xl font-semibold text-white mb-1">Career Nest</h3>
+                    <p class="text-sm text-gray-400 mb-4">Career Nest is a platform that helps students organize their career paths and showcase their achievements in a structured way.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-[#14b8a6] text-black text-xs px-3 py-1 rounded-full">HTML</span>
+                        <span class="bg-[#f97316] text-black text-xs px-3 py-1 rounded-full">CSS</span>
+                        <span class="bg-[#14b8a6] text-black text-xs px-3 py-1 rounded-full">JavaScript</span>
+                        <span class="bg-[#38bdf8] text-black text-xs px-3 py-1 rounded-full">Node.js</span>
+                    </div>
+                    <a href="https://careernestpro.netlify.app/" class="mt-4 md:mt-6 inline-block w-full btn-try-now">
+                        Try Now <i class="fa-solid fa-arrow-right ml-2 text-black transition-transform duration-300 group-hover:translate-x-1"></i>
+                    </a>
+                </div>
+                <div class="bg-[#111111] p-6 rounded-2xl card-effect">
+                   <img src="./images/Gemini_Generated_Image_o47blxo47blxo47b.png" alt="LMS" class="w-full h-48 object-cover rounded-xl mb-4">
+                    <h3 class="text-xl font-semibold text-white mb-1">Ur Library</h3>
+                    <p class="text-sm text-gray-400 mb-4">Platform to manage and enhance the library activities such as borrowing, returning, searching, renewing a book.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-[#f97316] text-black text-xs px-3 py-1 rounded-full">HTML</span>
+                        <span class="bg-[#8b5cf6] text-black text-xs px-3 py-1 rounded-full">CSS</span>
+                        <span class="bg-[#14b8a6] text-black text-xs px-3 py-1 rounded-full">JavaScript</span>
+                        <span class="bg-[#54b8a6] text-black text-xs px-3 py-1 rounded-full">Python</span>
+                    </div>
+                    <a href="https://urlibrary.vercel.app/" class="mt-4 md:mt-6 inline-block w-full btn-try-now">
+                        Try Now <i class="fa-solid fa-arrow-right ml-2 text-black transition-transform duration-300 group-hover:translate-x-1"></i>
+                    </a>
+                </div>
+                <div class="bg-[#111111] p-6 rounded-2xl card-effect">
+                     <img src="./images/Gemini_Generated_Image_ce3zfce3zfce3zfc.png" alt="Tune Verse" class="w-full h-48 object-cover rounded-xl mb-4">
+                    <h3 class="text-xl font-semibold text-white mb-1">Tune Verse</h3>
+                    <p class="text-sm text-gray-400 mb-4">Music platform designed to let users discover, organize, and enjoy songs seamlessly with an engaging experience.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-[#38bdf8] text-black text-xs px-3 py-1 rounded-full">Figma</span>
+                
+                    </div>
+                    <a href="https://www.figma.com/design/07o4C0NQEgcGII6WZlCARw/Tune_Verse?node-id=0-1&t=sf8uold0WcMLXMwB-1" class="mt-4 md:mt-6 inline-block w-full btn-try-now">
+                        Try Now <i class="fa-solid fa-arrow-right ml-2 text-black transition-transform duration-300 group-hover:translate-x-1"></i>
+                    </a>
+                </div>
+                <div class="bg-[#111111] p-6 rounded-2xl card-effect">
+                     <img src="./images/ChatGPT Image Sep 1, 2025, 09_19_03 PM.png" alt="Taskio" class="w-full h-48 object-cover rounded-xl mb-4">
+                    <h3 class="text-xl font-semibold text-white mb-1">Taskio</h3>
+                    <p class="text-sm text-gray-400 mb-4">Taskio is a smart task management platform with an intuitive drag-and-drop feature to easily organize, prioritize, and track daily activities.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-[#14b8a6] text-black text-xs px-3 py-1 rounded-full">React</span>
+                        <span class="bg-[#f97316] text-black text-xs px-3 py-1 rounded-full">Node.js</span>
+                        <span class="bg-[#8b5cf6] text-black text-xs px-3 py-1 rounded-full">MongoDB</span>
+                        <span class="bg-[#38bdf8] text-black text-xs px-3 py-1 rounded-full">Express.js</span>
+                    </div>
+                    <a href="https://taskio-pro.vercel.app/" class="mt-4 md:mt-6 inline-block w-full btn-try-now">
+                        Try Now <i class="fa-solid fa-arrow-right ml-2 text-black transition-transform duration-300 group-hover:translate-x-1"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact-section" class="py-16">
+            <h2 class="text-4xl font-bold text-white mb-2 section-header-animation">Contact</h2>
+            <div class="w-20 h-1 bg-[#14b8a6] rounded-full mb-10 section-header-animation divider-glow"></div>
+            <form id="contact-form" action="https://formspree.io/f/mpwlezdg" method="POST" class="max-w-xl mx-auto space-y-6 bg-[#111111] p-8 rounded-2xl card-effect">
+                <p class="text-lg text-gray-400 text-center">I'd love to hear from you. Send me a message!</p>
+                <div>
+                    <label for="name" class="block text-sm font-medium text-gray-400 mb-1">Name</label>
+                    <input type="text" id="name" name="name" class="w-full px-4 py-2 rounded-lg bg-[#0a0a0a] text-white border border-gray-700 focus:outline-none focus:border-[#38bdf8] transition-colors" required />
+                </div>
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-400 mb-1">Email</label>
+                    <input type="email" id="email" name="_replyto" class="w-full px-4 py-2 rounded-lg bg-[#0a0a0a] text-white border border-gray-700 focus:outline-none focus:border-[#38bdf8] transition-colors" required />
+                </div>
+                <div>
+                    <label for="message" class="block text-sm font-medium text-gray-400 mb-1">Message</label>
+                    <textarea id="message" name="message" rows="4" class="w-full px-4 py-2 rounded-lg bg-[#0a0a0a] text-white border border-gray-700 focus:outline-none focus:border-[#38bdf8] transition-colors" required></textarea>
+                </div>
+                <button type="submit" id="submit-button" class="btn-effect w-full py-3 px-6 rounded-full font-bold transition-all duration-300 shadow-lg bg-[#14b8a6] text-black hover:bg-[#14b8a6]/80">
+                    Send Message
+                </button>
+            </form>
+        </section>
+    </main>
+
+    <footer class="bg-[#111111] py-8 mt-12">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <div class="flex justify-center space-x-6 text-gray-400 mb-6">
+                <a href="https://github.com/Syedmeeran1154" aria-label="GitHub" class="footer-icon transform">
+                    <i class="fa-brands fa-github"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/syed-meeran-s-3a7880268/" aria-label="LinkedIn" class="footer-icon transform">
+                    <i class="fa-brands fa-linkedin"></i>
+                </a>
+                <a href="https://www.instagram.com/syed.meeran_05/" aria-label="Instagram" class="footer-icon transform">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+                <a href="mailto:syedmeerans.work@gmail.com" aria-label="Email" class="footer-icon transform">
+                    <i class="fa-solid fa-envelope"></i>
+                </a>
+                <a href="tel:+9790851497" aria-label="Phone" class="footer-icon transform">
+                    <i class="fa-solid fa-phone"></i>
+                </a>
+            </div>
+            <p class="text-sm text-gray-500">
+                &copy; 2025 Syed Meeran S. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <div id="modal-container">
+        <div id="web-dev-modal" class="fixed inset-0 z-50 bg-black bg-opacity-80 hidden flex justify-center items-center p-4">
+            <div class="modal-animation bg-[#111111] rounded-2xl p-8 max-w-lg w-full text-gray-200 relative">
+                <button class="close-modal absolute top-4 right-4 text-gray-400 hover:text-white transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                </button>
+                <h3 class="text-2xl font-bold text-white mb-4">Web Development</h3>
+                <div class="w-16 h-1 bg-[#38bdf8] rounded-full mb-6"></div>
+                <p class="text-gray-300">
+                    I build robust and scalable websites using the latest front-end and back-end frameworks, ensuring a seamless and high-performing final product. My expertise covers everything from simple static sites to complex, data-driven web applications.
+                </p>
+            </div>
+        </div>
+
+        <div id="mobile-apps-modal" class="fixed inset-0 z-50 bg-black bg-opacity-80 hidden flex justify-center items-center p-4">
+            <div class="modal-animation bg-[#111111] rounded-2xl p-8 max-w-lg w-full text-gray-200 relative">
+                <button class="close-modal absolute top-4 right-4 text-gray-400 hover:text-white transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                </button>
+                <h3 class="text-2xl font-bold text-white mb-4">Mobile Apps</h3>
+                <div class="w-16 h-1 bg-[#f97316] rounded-full mb-6"></div>
+                <p class="text-gray-300">
+                    I develop cross-platform mobile applications for iOS and Android, focusing on delivering a native feel with excellent performance. My process includes everything from UI design to app store deployment.
+                </p>
+            </div>
+        </div>
+
+        <div id="ui-ux-modal" class="fixed inset-0 z-50 bg-black bg-opacity-80 hidden flex justify-center items-center p-4">
+            <div class="modal-animation bg-[#111111] rounded-2xl p-8 max-w-lg w-full text-gray-200 relative">
+                <button class="close-modal absolute top-4 right-4 text-gray-400 hover:text-white transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                </button>
+                <h3 class="text-2xl font-bold text-white mb-4">UI/UX Design</h3>
+                <div class="w-16 h-1 bg-[#14b8a6] rounded-full mb-6"></div>
+                <p class="text-gray-300">
+                    I create intuitive and aesthetically pleasing user interfaces and experiences. My process includes user research, wireframing, prototyping, and user testing to ensure the final design is both beautiful and highly functional.
+                </p>
+            </div>
+        </div>
+
+        <div id="dsa-modal" class="fixed inset-0 z-50 bg-black bg-opacity-80 hidden flex justify-center items-center p-4">
+            <div class="modal-animation bg-[#111111] rounded-2xl p-8 max-w-lg w-full text-gray-200 relative">
+                <button class="close-modal absolute top-4 right-4 text-gray-400 hover:text-white transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                </button>
+                <h3 class="text-2xl font-bold text-white mb-4">Problem Solving & DSA</h3>
+                <div class="w-16 h-1 bg-[#06b6d4] rounded-full mb-6"></div>
+                <p class="text-gray-300">
+                    I excel at solving complex problems by applying a strong foundation in Data Structures and Algorithms. My approach involves analyzing problem constraints, selecting the most optimal data structure, and crafting efficient, well-documented solutions.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ----------------------------------------------------
+        // Smooth Scroll & Navigation Logic
+        // ----------------------------------------------------
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // ----------------------------------------------------
+        // Mobile Menu Logic
+        // ----------------------------------------------------
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const closeMenuButton = document.getElementById('close-menu-button');
+        const mobileNavLinks = mobileMenu.querySelectorAll('.nav-link');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.remove('hidden');
+        });
+
+        closeMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+        });
+
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // ----------------------------------------------------
+        // Modal Logic
+        // ----------------------------------------------------
+        const modalTriggers = document.querySelectorAll('.modal-trigger');
+        const modals = document.querySelectorAll('#modal-container > div');
+        const closeModalButtons = document.querySelectorAll('.close-modal');
+
+        modalTriggers.forEach(trigger => {
+            trigger.addEventListener('click', () => {
+                const targetModalId = trigger.dataset.modalTarget;
+                const modal = document.getElementById(targetModalId);
+                if (modal) {
+                    modal.classList.remove('hidden');
+                }
+            });
+        });
+
+        closeModalButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const modal = button.closest('.fixed');
+                modal.classList.add('hidden');
+            });
+        });
+        
+        // Close modal on outside click
+        modals.forEach(modal => {
+            modal.addEventListener('click', (e) => {
+                if (e.target.classList.contains('bg-opacity-80')) {
+                    modal.classList.add('hidden');
+                }
+            });
+        });
+
+        // ----------------------------------------------------
+        // Contact Form Logic (no custom JS needed for Formspree)
+        // ----------------------------------------------------
+        // The form now uses the 'action' and 'method' attributes to submit directly to Formspree.
+        // No custom JavaScript is needed for the form submission itself.
+        // Formspree handles the sending of the email on the backend.
+
+        // ----------------------------------------------------
+        // Glowing Background Animation
+        // ----------------------------------------------------
+        window.onload = function() {
+            const canvas = document.getElementById('background-canvas');
+            const ctx = canvas.getContext('2d');
+            const colorPalette = ['#14b8a6', '#38bdf8', '#f97316', '#8b5cf6'];
+            let balls = [];
+            const numBalls = 30; // Number of glowing orbs
+
+            // Function to set canvas dimensions
+            function setCanvasSize() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+
+            // Ball constructor function
+            function Ball(x, y, radius, color) {
+                this.x = x;
+                this.y = y;
+                this.radius = radius;
+                this.color = color;
+                this.vx = (Math.random() - 0.5) * 0.5; // Slow velocity
+                this.vy = (Math.random() - 0.5) * 0.5; // Slow velocity
+            }
+
+            Ball.prototype.draw = function() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+                
+                // Add the glowing effect
+                ctx.shadowColor = this.color;
+                ctx.shadowBlur = this.radius * 2;
+                
+                ctx.fillStyle = this.color;
+                ctx.fill();
+                
+                // Reset shadow for other drawings
+                ctx.shadowBlur = 0;
+            };
+
+            Ball.prototype.update = function() {
+                // Bounce off the edges
+                if (this.x + this.radius > canvas.width || this.x - this.radius < 0) {
+                    this.vx = -this.vx;
+                }
+                if (this.y + this.radius > canvas.height || this.y - this.radius < 0) {
+                    this.vy = -this.vy;
+                }
+
+                // Update position
+                this.x += this.vx;
+                this.y += this.vy;
+
+                // Redraw
+                this.draw();
+            };
+
+            // Initialize balls
+            function init() {
+                balls = [];
+                for (let i = 0; i < numBalls; i++) {
+                    const radius = Math.random() * 2 + 1;
+                    const x = Math.random() * (canvas.width - radius * 2) + radius;
+                    const y = Math.random() * (canvas.height - radius * 2) + radius;
+                    const color = colorPalette[Math.floor(Math.random() * colorPalette.length)];
+                    balls.push(new Ball(x, y, radius, color));
+                }
+            }
+
+            // Animation loop
+            function animate() {
+                requestAnimationFrame(animate);
+                ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas
+
+                for (let i = 0; i < balls.length; i++) {
+                    balls[i].update();
+                }
+            }
+
+            // Event listeners
+            window.addEventListener('resize', () => {
+                setCanvasSize();
+                init(); // Re-initialize balls on resize to keep them in view
+            });
+
+            // Start the animation
+            setCanvasSize();
+            init();
+            animate();
+        };
+    </script>
+</body>
+</html>
